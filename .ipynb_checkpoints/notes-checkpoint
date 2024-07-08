@@ -1,0 +1,19 @@
+justcrossit.vercel.app/profile
+
+authentification
+back end setup authentification
+middlewares
+note 
+body
+pririty of note- radials
+custome labels/tags -appended into app for notes itself, array format,
+change fonts ect
+custome note colours
+fetches data from datapass to display the note
+delete, trash, archive, update note
+create notefetch data from dashboard specific to user, update and delete note
+field is deleted?
+alert with error if not deleted sucessful
+login/logout
+Mongo DB Atlas/Compass - for remote hosting
+
