@@ -79,7 +79,75 @@ This application allows user specific notes to be:
         - Change colour
         - Add Note/Update Note
         - Cancel
-        
-        
-        
-        
+
+-----------------------------------------------
+# This is a simple notetakeing app
+
+## Frontend
+/views
+- HTML
+- EJS
+- JS
+- Bootstrap
+
+## Backend
+- Node 
+- Express
+
+### Routing
+/routes
+
+## DB Connector
+/db
+
+## Database
+- Sqlite
+
+## Usage
+
+```
+npm install
+npm start
+```
+
+## References 
+
+https://www.youtube.com/watch?v=jins2yHN81s
+
+
+
+notetaking-app/
+
+app.js
+
+config/
+
+db.js
+
+models/
+
+notetakingappSchema.js
+
+note.js
+
+routes/
+
+index.js
+
+notes.js
+
+views/
+
+index.ejs
+
+new.ejs
+
+edit.ejs
+
+layout.ejs
+
+public/
+
+styles.css
+
+package.json
