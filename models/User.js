@@ -1,31 +1,38 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
+const bcrypt = require("bcryptjs");
 
-const Schema = mongoose.Schema;
-const UserSchema = new Schema({
-    googleID: {
-        type: String,
-        required: true
+const userSchema = new mongoose.Schema({
+  email: {
+    type: String,
+    required: true,
+    unique: true,
+    validate: {
+      validator: (email) => {
+        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        return emailRegex.test(email);
+      },
+      message: 'Invalid email address',
     },
-    displayName: {
-        type: String,
-        required: true
-    },
-    firstName: {
-        type: String,
-        required: true
-    },
-    lastName: {
-        type: String,
-        required: true
-    },
-    profileImage: {
-        type: String,
-        required: true
-    },
-    createdAt: {
-        type: Date,
-        default:Date.now
-    }
+  },
+  password: {
+    type: String,
+  },
+  username: {
+    type: String,
+  },
+  googleID: {
+    type: String,
+  },
 });
 
-module.exports = mongoose.model('User', UserSchema);
+userSchema.pre("save", async function (next) {
+  if (this.password) {
+    const salt = await bcrypt.genSalt(10);
+    this.password = await bcrypt.hash(this.password, salt);
+  }
+  next();
+});
+
+const User = mongoose.model("User", userSchema);
+
+module.exports = User;
