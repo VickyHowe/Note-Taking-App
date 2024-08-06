@@ -5,18 +5,10 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/user");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const bcrypt = require('bcryptjs');
-const ExtractJwt = require("passport-jwt").ExtractJwt;
 const LocalStrategy = require("passport-local").Strategy;
 const flash = require('connect-flash');
 
 router.use(flash());
-
-
-// const options = {
-//   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-//   secretOrKey: process.env.SECRET
-// };
-
 
 passport.use(new LocalStrategy({
   usernameField: "email",
