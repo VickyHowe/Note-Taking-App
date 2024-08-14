@@ -113,6 +113,9 @@ npm start
 ## References 
 
 https://www.youtube.com/watch?v=jins2yHN81s
+https://github.com/jdesboeufs/connect-mongo/blob/HEAD/MIGRATION_V4.md
+
+https://youtu.be/F-sFp_AvHc8
 
 
 
@@ -151,3 +154,5 @@ public/
 styles.css
 
 package.json
+
+
