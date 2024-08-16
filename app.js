@@ -8,7 +8,7 @@ const passport = require("passport");
 const session = require('express-session');
 
 const MongoStore = require('connect-mongo');
-
+const errorHandler = require('./middlewares/errorHandler');
 
  // General Setup
 
@@ -75,23 +75,9 @@ app.use("/", require("./routes/notes"));
  * Error Handler
  */
 
-//todo
-/**
- * Error Routes
- */
-app.use((err, req, res, next) => {
-  if (err.status === 401) {
-    res.status(401).render('401', {
-      layout: '../views/layouts/home',
-      info: {
-        title: '401',
-        description: 'Unauthorized'
-      }
-    });
-  } else {
-    next(err);
-  }
-});
+
+app.use(errorHandler);
+
 
 app.get('*', (req, res) => {
   res.status(404).render('404', {

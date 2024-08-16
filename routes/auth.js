@@ -6,6 +6,7 @@ const User = require("../models/user");
 const isAuth = require("../middlewares/authorizedUser").isAuth;
 
 
+
 // Google Login Route
 router.get(
 "/auth/google",
@@ -21,9 +22,15 @@ successRedirect: "/dashboard",
 }));
 
 
-// Register route
-router.post("/register", async (req, res) => {
+router.post("/register", async (req, res, next) => {
   const { email, password, username } = req.body;
+
+  if (!email || !password || !username) {
+    const err = new Error('Email, password, and username are required');
+    err.status = 400;
+    return next(err);
+  }
+
   try {
     const newUser = await User.create({ email, password, username });
     req.logIn(newUser, (err) => {
@@ -33,12 +40,10 @@ router.post("/register", async (req, res) => {
       res.redirect("/dashboard");
     });
   } catch (err) {
-    res.status(500).json({
-      message: "Could not create the user",
-      error: err,
-    });
+    return next(err);
   }
 });
+
 
 // Login Route
 router.post("/login", (req, res, next) => {
@@ -47,10 +52,10 @@ router.post("/login", (req, res, next) => {
       return next(err);
     }
     if (!user) {
-      return res.status(401).render("401", {
+      return res.status(401).render("error", {
         info: {
           title: '401',
-          description: 'A Note Taking App'
+          description: 'Invalid User'
         }
       });
     }
@@ -62,7 +67,6 @@ router.post("/login", (req, res, next) => {
     });
   })(req, res, next);
 });
-
 
 
 
