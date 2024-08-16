@@ -156,3 +156,6 @@ styles.css
 package.json
 
 
+images
+https://www.pexels.com/photo/a-corkboard-with-blank-notes-8534461/
+https://www.pexels.com/photo/blank-white-paper-sheet-on-wooden-table-4207707/

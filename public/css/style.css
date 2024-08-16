@@ -1,0 +1,36 @@
+:root {
+    --background-color: linen;
+    --background-size: cover;
+    --background-position: center;
+    --bs-primary-rgb: #996a12;
+}
+body {
+    font-family: "PT Serif", serif;
+    font-weight: 400;
+    font-style: normal;
+    background-color: var(--background-color);
+    background-size: var(--background-size);
+    background-position: var(--background-position);
+    color: var(--bs-primary-rgb);
+    font-weight:400;
+    font-size: 1.5rem;
+  }
+
+h1,h2,h3,h4,h5,h6,p {
+    font-family: "Poppins", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+}  
+
+.container-fluid-fitnote{
+    max-width: 1200px;
+}
+
+.btn {
+    background-color: var(--bs-primary-rgb);
+    border-color: var(--bs-primary-rgb);
+}
+
+.nav-link {
+    color: var(--bs-primary-rgb);
+}

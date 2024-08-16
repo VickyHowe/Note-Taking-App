@@ -1,17 +1,18 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Dashboard</title>
-  <script src="script.js"></script>
-</head>
-<body>
-<!-- dashboard.ejs -->
+<div class="container-fluid container-fluid-wide pb-5 mb-5">
+<div class="row mb-4">
+  <div class="col">
+    <h1>Welcome 
+      <%= user %>,
+      To Your Notes!
+    </h1>
+  </div>
+  <div class="col text-end">
+    <a href="/dashboard/add" class="btn btn-primary">Create Note</a>
+  </div>
+</div>
+<div class="row">
 
-<h1>Dashboard</h1>
-<div id="dashboard-data"></div>
-<form action="/logout" method="post">
-  <button type="submit">Logout</button>
-</form>
-</body>
-</html>
+  
+</div>
 
+</div>
