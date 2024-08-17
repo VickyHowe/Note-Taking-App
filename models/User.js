@@ -20,17 +20,20 @@ const userSchema = new mongoose.Schema({
   username: {
     type: String,
   },
-  googleID: {
-    type: String,
-  },
 });
 
 userSchema.pre("save", async function (next) {
-  if (this.password) {
-    const salt = await bcrypt.genSalt(10);
-    this.password = await bcrypt.hash(this.password, salt);
+  try {
+    if (this.password) {
+      const salt = await bcrypt.genSalt(10);
+      this.password = await bcrypt.hash(this.password, salt);
+    }
+    console.log(`Saving user with email: ${this.email}`);
+    next();
+  } catch (err) {
+    console.error(`Error saving user: ${err}`);
+    next(err);
   }
-  next();
 });
 
 const User = mongoose.model("User", userSchema);

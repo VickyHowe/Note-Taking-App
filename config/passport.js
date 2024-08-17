@@ -7,31 +7,25 @@ const LocalStrategy = require("passport-local").Strategy;
 /**
  * Passport Local Strategy
  */
-passport.use(
-  new LocalStrategy(
-    {
-      emailField: "email",
-      usernameField: "username",
-      passwordField: "password",
-    },
-    async (email, username, password, done) => {
-      try {
-        const user = await User.findOne({ email });
-        if (!user) {
-          return done(null, false, { message: "User not found!" });
-        }
-        const isValid = await bcrypt.compare(password, user.password);
-        if (!isValid) {
-          return done(null, false, { message: "Incorrect password!" });
-        }
-        return done(null, user);
-      } catch (err) {
-        return done(err);
-      }
-    }
-  )
-);
 
+passport.use(new LocalStrategy({
+  usernameField: "email",
+  passwordField: "password"
+}, async (email, password, done) => {
+  try {
+    const user = await User.findOne({ email });
+    if (!user) {
+      return done(null, false, { message: "User not found!" });
+    }
+    const isValid = await bcrypt.compare(password, user.password);
+    if (!isValid) {
+      return done(null, false, { message: "Incorrect password!" });
+    }
+    return done(null, user);
+  } catch (err) {
+    return done(err);
+  }
+}));
 /**
  * Passport Google Strategy
  */

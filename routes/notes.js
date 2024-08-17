@@ -4,87 +4,125 @@ const User = require("../models/user");
 const Notes = require("../models/notes");
 const { isAuth } = require("../middlewares/authorizedUser");
 
-
-// Load Dashboard
-router.get("/dashboard", isAuth, (req, res, next) => {
+// /dashboard route
+router.get("/dashboard", isAuth, async (req, res, next) => {
+  try {
+    const notes = await Notes.aggregate([
+      {
+        $match: {
+          user_id: req.user._id,
+        },
+      },
+      {
+        $project: {
+          title: { $substr: ['$title', 0, 20] },
+          noteBody: { $substr: ['$noteBody', 0, 200] },
+        },
+      },
+    ]);
     res.render("dashboard", {
       user: req.user.username,
+      userId: req.user._id,
+      notes,
       layout: "../views/layouts/dashboardFrame",
       info: {
         title: "Dashboard",
-        description: "Dashboard - Note Taking App ",
+        description: "Dashboard - Note Taking App",
       },
     });
-  });
-
-
-
-// Gets all the notes
-router.get('/notes',isAuth, async(req, res) => {
-  try {
-    const notes = await Notes.find().exec();
-    res.json(Notes);
-  } catch (error) {
-    res.status(500).json({ message: 'Error fetching notes' });
+  } catch (err) {
+    next(err);
   }
+});
 
+
+// // Load Dashboard
+// router.get("/dashboard", isAuth, async (req, res, next) => {  
+
+//   try {
+//     const notes = await Notes.find({ user_id: req.user._id });
+//     res.render("dashboard", {
+//       user: req.user.username,
+//       userId: req.user._id,
+//       notes,
+//       layout: "../views/layouts/dashboardFrame",
+//       info: {
+//         title: "Dashboard",
+//         description: "Dashboard - Note Taking App "
+//       }
+//     });
+//   } catch (err) {
+//     console.log(err);
+//     next(err);
+//   }
+// });
+
+
+
+
+// Create a new note
+router.post("/dashboard/note-create", isAuth, async (req, res, next) => {
+  console.log("Req body:", req.body); 
+  try {
+    const newNote = new Notes({
+      user_id:req.user._id,
+      title:req.body.title,
+      noteBody:req.body.noteBody,
+    });
+    await newNote.save();
+    console.log("Note created:", newNote); 
+    res.redirect("/dashboard");
+  } catch (err) {
+    next(err);
+  }
+});
+
+
+
+router.get("/dashboard/note-create", isAuth, async(req, res) => {
+  console.log("Rendering Create Note Page");
+  res.render("note-create", {
+    layout: "../views/layouts/dashboardFrame",
+    info: {
+      title: "Create A Note",
+      description: "Create a Note - Note Taking App ",
+    },
+  });
 });
 
 // Get specific note by ID
-router.get('/notes/:id', isAuth, async (req, res) => {
+router.get("/dashboard/notes-edit/:id", isAuth, async (req, res, next) => {
   try {
     const id = req.params.id;
-    const note = await Notes.findById(id).exec();
+    const note = await Notes.findOne({ _id: id, user: req.user.id });
     if (note) {
-      res.json(note);
+      res.render("notePage", {
+        noteID: req.params.id,
+        note,
+        layout: "../views/layouts/dashboardFrame",
+        info: {
+          title: "Note Page",
+          description: "Note PAge - Note Taking App ",
+        },
+      });
     } else {
-      res.status(404).json({ message: `Note not found with ID ${id}` });
+      const err = new Error(`Note not found with ID ${id}`);
+      err.status = 404;
+      next(err);
     }
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Error fetching note' });
+  } catch (err) {
+    next(err);
   }
 });
-
-// Create a new note
-router.post('/notes', isAuth, async (req, res) => {
-  try {
-    const { title, content } = req.body;
-    const note = new Notes({ title, content, userId: req.user.id });
-    await note.save();
-    res.json(note);
-  } catch (error) {
-    res.status(500).json({ message: 'Error creating note' });
-  }
-});
-
-// Update a note by ID
-router.put('/notes/:id', isAuth, async (req, res) => {
-  try {
-    const id = req.params.id;
-    const note = await Notes.findByIdAndUpdate(id, req.body, { new: true }).exec();
-    if (note) {
-      res.json(note);
-    } else {
-      res.status(404).json({ message: `Note with ID ${id} not found` });
-    }
-  } catch (error) {
-    res.status(500).json({ message: 'Error updating note' });
-  }
-});
-
 // Delete a note by ID
-router.delete('/notes/:id', isAuth, async (req, res) => {
+router.delete("/notes-delete/:id", isAuth, async (req, res, next) => {
   try {
     const id = req.params.id;
-    const note = await Notes.findByIdAndRemove(id).exec();
-    if (note) {
-      res.json({ message: `Note with ID ${id} deleted successfully` });
-    } else {
-      res.status(404).json({ message: `Note with ID ${id} not found` });
-    }
-  } catch (error) {
-    res.status(500).json({ message: 'Error deleting note' });
+    await Notes.deleteOne({ _id: id, user: req.user.id });
+  res.redirect('/dashboard');
+  } catch (err) {
+    next(err);
   }
 });
+
 module.exports = router;

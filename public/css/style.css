@@ -24,6 +24,13 @@ h1,h2,h3,h4,h5,h6,p {
 
 .container-fluid-fitnote{
     max-width: 1200px;
+    padding: 30px;
+}
+.container-fluid-displaynote{
+    background-color: var(--bs-primary-rgb);
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 20px;
 }
 
 .btn {
@@ -34,3 +41,57 @@ h1,h2,h3,h4,h5,h6,p {
 .nav-link {
     color: var(--bs-primary-rgb);
 }
+
+.lead {
+    font-size: 1.5rem;
+}
+btn-group .btn{
+    margin-right: 10px;
+}
+
+
+.note-card {
+    max-width: 100%; 
+    flex-grow: 1;
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; 
+  }
+  
+  .note-card > div {
+    flex-basis: 30%; 
+    margin: 10px;
+  }
+  
+  .card {
+    background-color:var(--background-color);
+    border-radius: 10px;
+    width: 100%;
+    padding: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .note-card .card-body {
+    padding: 20px; 
+  }
+  
+  .card-body {
+    width: 100%; 
+  }
+  
+  .card-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .card-text {
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
+
+  .btn-create {
+    background-color: var(--background-color);
+    color: var(--text-color);
+  }

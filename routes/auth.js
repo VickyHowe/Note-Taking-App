@@ -37,6 +37,7 @@ router.post("/register", async (req, res, next) => {
       if (err) {
         return next(err);
       }
+      console.log('User registered successfully');
       res.redirect("/dashboard");
     });
   } catch (err) {
@@ -44,6 +45,15 @@ router.post("/register", async (req, res, next) => {
   }
 });
 
+
+router.get('/users', async (req, res) => {
+  try {
+    const users = await User.find().select('-password'); // exclude password from the response
+    res.send(users);
+  } catch (err) {
+    res.status(500).send('Error fetching users');
+  }
+});
 
 // Login Route
 router.post("/login", (req, res, next) => {
@@ -67,7 +77,6 @@ router.post("/login", (req, res, next) => {
     });
   })(req, res, next);
 });
-
 
 
 module.exports = router;
