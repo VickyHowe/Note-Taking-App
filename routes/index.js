@@ -4,7 +4,16 @@ const User = require("../models/user");
 const Notes = require("../models/notes");
 const isAuth = require("../middlewares/authorizedUser").isAuth;
 
-// Load Homepage
+/**
+ * @swagger
+ * /:
+ *   get:
+ *     summary: Load Homepage
+ *     description: Renders the homepage
+ *     responses:
+ *       200:
+ *         description: Homepage rendered successfully
+ */
 router.get("/", (req, res) => {
   try {
   res.render("index", {
@@ -20,7 +29,16 @@ router.get("/", (req, res) => {
 });
 
 
-// Load Login Page
+/**
+ * @swagger
+ * /login:
+ *   get:
+ *     summary: Load Login Page
+ *     description: Renders the login page
+ *     responses:
+ *       200:
+ *         description: Login page rendered successfully
+ */
 router.get("/login", (req, res) => {
   try {
   res.render("login", {
@@ -34,7 +52,16 @@ router.get("/login", (req, res) => {
   }
 });
 
-// register user page
+/**
+ * @swagger
+ * /register:
+ *   get:
+ *     summary: Load Register Page
+ *     description: Renders the register page
+ *     responses:
+ *       200:
+ *         description: Register page rendered successfully
+ */
 router.get("/register", (req, res) => {
   try {
   res.render("register", {
@@ -48,7 +75,16 @@ router.get("/register", (req, res) => {
   }
 });
 
-// Logout route
+/**
+ * @swagger
+ * /logout:
+ *   get:
+ *     summary: Logout User
+ *     description: Logs out the user
+ *     responses:
+ *       302:
+ *         description: Redirect to homepage
+ */
 router.get("/logout", (req, res) => {
   try {
   req.logout((err) => {

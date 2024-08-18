@@ -11,10 +11,11 @@ This application utilizes;
 
 + node.js with Express to handle middlewares
 + A MongoDB local database to store data
-+ CRUD Operations to handle User requests
++ CRUD Operations to handle User through RESTful API requests
 + Error Handling through custom middlewares
 + User Navigation through EJS with Bootstrap and CSS
 + A simple login system with Passport.js for authentication
++ API Route Definitions with Swagger
 
 
 
@@ -83,7 +84,8 @@ npm start
 2. Open a web browser and navigate to `http://localhost:(match port number you set)/` to access
 
 
-
+### Referencing the API
+The API is documented using Swagger. You can access the API documentation by navigating to `http://localhost:(Portyouchose)/api-info`
 
 ## References 
 Throughout this project I referenced Blackbox ai to aid in troubleshoot issues when I got stuck.
@@ -132,9 +134,9 @@ My images are free public images from;
   <summary>Nice To Have Future Features</summary>
   <ul>
     <li>>Application Testing</li>
-    <li>API Route Definitions with Swagger</li>
     <li>Categories for note sorting</li>
     <li>Custom colours for notes</li>\
     <li>Trash Bin to hold deleted notes until emptied</li>
   </ul>
 </details>
+
