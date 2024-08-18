@@ -45,15 +45,15 @@ router.post("/register", async (req, res, next) => {
   }
 });
 
-
-router.get('/users', async (req, res) => {
-  try {
-    const users = await User.find().select('-password'); // exclude password from the response
-    res.send(users);
-  } catch (err) {
-    res.status(500).send('Error fetching users');
-  }
-});
+// this route is for testing users in database
+// router.get('/users', async (req, res) => {
+//   try {
+//     const users = await User.find().select('-password'); 
+//     res.send(users);
+//   } catch (err) {
+//     res.status(500).send('Error fetching users');
+//   }
+// });
 
 // Login Route
 router.post("/login", (req, res, next) => {

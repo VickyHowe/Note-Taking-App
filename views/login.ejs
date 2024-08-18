@@ -1,19 +1,22 @@
-<div class = "container-fluid container-fluid-fitnote">
+<div class = "container-fluid container-fluid-login">
     <div class="container">
       <h1>Login</h1>
-      <form action="/login" method="post">
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" /><br /><br />
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" /><br /><br />
-        <input type="submit" value="Login" />
-      </form>
-
-      <p>Or login with Google:</p>
-      <a href="/auth/google" class="google-btn"> Login with Google </a>
-
-      <p>Don't have an account? <a href="/register">Register</a></p>
-
+      <form action="/login" method="post" class="login-form text-center">
+        <div class="form-group">
+          <label for="email" class="form-label">Email:</label>
+          <input type="email" id="email" name="email" class="form-control" />
+        </div>
+        <div class="form-group">
+          <label for="password" class="form-label">Password:</label>
+          <input type="password" id="password" name="password" class="form-control" />
+        </div>
+        <input type="submit" value="Login" class="btn btn-secondary btn-create btn-lg btn-block mb-3" />
+      <p>Or</p>
+      <a mb-2 href="/auth/google">
+        <img src="/img/google-login-button.svg" alt="Login with Google" />
+      </a>
+    </form>
+      <p>Don't have an account? <a href="/register" class="btn btn-secondary btn-create btn-lg">Register</a></p>
       <p id="error-message" class="error" style="display: none"></p>
     </div>
 </div>

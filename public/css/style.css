@@ -21,21 +21,75 @@ h1,h2,h3,h4,h5,h6,p {
     font-weight: 300;
     font-style: normal;
 }  
+.note-welcome-user {
+  color: var(--background-color);
+  text-align: left;
+}
 
 .container-fluid-fitnote{
+    background-color: var(--bs-primary-rgb);
+    color: var(--background-color);
     max-width: 1200px;
-    padding: 30px;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 10px;
 }
 .container-fluid-displaynote{
     background-color: var(--bs-primary-rgb);
     max-width: 1600px;
     margin: 0 auto;
     padding: 20px;
+    border-radius: 10px;
 }
+.container-fluid-login {
+  color: var(--background-color);
+  justify-content: center;
+  background-color: var(--bs-primary-rgb);
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 10px;
+}
+
 
 .btn {
     background-color: var(--bs-primary-rgb);
     border-color: var(--bs-primary-rgb);
+}
+
+btn-group .btn{
+  margin-right: 10px;
+}
+
+.btn-create {
+background-color: var(--background-color);
+color: var(--bs-primary-rgb);
+}
+
+.login-form {
+  max-width: 400px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: var(--background-color);
+  color: var(--bs-primary-rgb);
+  border-radius: 10px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: bold;
+  text-align: left;
+}
+
+.form-control {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
 }
 
 .nav-link {
@@ -45,10 +99,6 @@ h1,h2,h3,h4,h5,h6,p {
 .lead {
     font-size: 1.5rem;
 }
-btn-group .btn{
-    margin-right: 10px;
-}
-
 
 .note-card {
     max-width: 100%; 
@@ -56,12 +106,12 @@ btn-group .btn{
     padding: 20px;
     display: flex;
     flex-wrap: wrap;
-    justify-content: center; 
+    justify-content: left; 
   }
   
   .note-card > div {
     flex-basis: 30%; 
-    margin: 10px;
+    margin: 20px;
   }
   
   .card {
@@ -91,7 +141,19 @@ btn-group .btn{
     margin-bottom: 20px;
   }
 
-  .btn-create {
-    background-color: var(--background-color);
-    color: var(--text-color);
+  .card-link {
+    display: block;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
   }
+  /* .breadcrumb-item {
+    color: var(--background-color);
+  }
+  .main-breadcrumb-color {
+    color: var(--background-color);
+  }
+  
+  .active-breadcrumb-color {
+    color: var(--background-color);
+  } */
