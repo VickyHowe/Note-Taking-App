@@ -4,7 +4,18 @@ const User = require("../models/user");
 const Notes = require("../models/notes");
 const { isAuth } = require("../middlewares/authorizedUser");
 
-// /dashboard route
+/**
+ * @swagger
+ * /dashboard:
+ *   get:
+ *     summary: Load Dashboard
+ *     description: Renders the dashboard for authenticated users
+ *     security:
+ *       - cookieAuth: []
+ *     responses:
+ *       200:
+ *         description: Dashboard rendered successfully
+ */
 router.get("/dashboard", isAuth, async (req, res, next) => {
   try {
     const notes = await Notes.aggregate([
@@ -36,7 +47,32 @@ router.get("/dashboard", isAuth, async (req, res, next) => {
 });
 
 
-// Create a new note
+/**
+ * @swagger
+ * /dashboard/note-create:
+ *   post:
+ *     summary: Create a new note
+ *     description: Creates a new note for authenticated users
+ *     security:
+ *       - cookieAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - title
+ *               - noteBody
+ *             properties:
+ *               title:
+ *                 type: string
+ *               noteBody:
+ *                 type: string
+ *     responses:
+ *       201:
+ *         description: Note created successfully
+ */
 router.post("/dashboard/note-create", isAuth, async (req, res, next) => {
   try {
     const newNote = new Notes({
@@ -52,7 +88,18 @@ router.post("/dashboard/note-create", isAuth, async (req, res, next) => {
 });
 
 
-// Get note Page
+/**
+ * @swagger
+ * /dashboard/note-create:
+ *   get:
+ *     summary: Get note creation page
+ *     description: Renders the note creation page for authenticated users
+ *     security:
+ *       - cookieAuth: []
+ *     responses:
+ *       200:
+ *         description: Note creation page rendered successfully
+ */
 router.get("/dashboard/note-create", isAuth, async(req, res, next) => {
   try {
   res.render("note-create", {
@@ -68,7 +115,26 @@ router.get("/dashboard/note-create", isAuth, async(req, res, next) => {
 });
 
 
-// Get specific note by ID
+/**
+ * @swagger
+ * /dashboard/notes/{id}:
+ *   get:
+ *     summary: Get specific note by ID
+ *     description: Retrieves a specific note by ID for authenticated users
+ *     security:
+ *       - cookieAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Note retrieved successfully
+ *       404:
+ *         description: Note not found
+ */
 router.get("/dashboard/notes/:id", isAuth, async (req, res, next) => {
   try {
     const id = req.params.id;
@@ -93,7 +159,40 @@ router.get("/dashboard/notes/:id", isAuth, async (req, res, next) => {
 });
 
 
-// Update a note by ID
+/**
+ * @swagger
+ * /dashboard/notes/{id}:
+ *   put:
+ *     summary: Update a note by ID
+ *     description: Updates a specific note by ID for authenticated users
+ *     security:
+ *       - cookieAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - title
+ *               - noteBody
+ *             properties:
+ *               title:
+ *                 type: string
+ *               noteBody:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Note updated successfully
+ *       404:
+ *         description: Note not found
+ */
 router.put("/dashboard/notes/:id", isAuth, async (req, res, next) => {
   try {
     const id = req.params.id;
@@ -113,7 +212,26 @@ router.put("/dashboard/notes/:id", isAuth, async (req, res, next) => {
 });
 
 
-// Delete a note by ID
+/**
+ * @swagger
+ * /dashboard/notes/{id}:
+ *   delete:
+ *     summary: Delete a note by ID
+ *     description: Deletes a specific note by ID for authenticated users
+ *     security:
+ *       - cookieAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Note deleted successfully
+ *       404:
+ *         description: Note not found
+ */
 router.delete("/dashboard/notes/:id", isAuth, async (req, res, next) => {
   try {
     const id = req.params.id;
@@ -130,7 +248,18 @@ router.delete("/dashboard/notes/:id", isAuth, async (req, res, next) => {
 });
 
 
-// Get Search Note
+/**
+ * @swagger
+ * /dashboard/note-search:
+ *   get:
+ *     summary: Get Search Note Page
+ *     description: Renders the search note page for authenticated users
+ *     security:
+ *       - cookieAuth: []
+ *     responses:
+ *       200:
+ *         description: Search note page rendered successfully
+ */
 router.get("/dashboard/note-search", isAuth, async(req, res, next) => {
   try {
     res.render("note-search", {
@@ -149,7 +278,29 @@ router.get("/dashboard/note-search", isAuth, async(req, res, next) => {
 
 
 
-// Post Search Note
+/**
+ * @swagger
+ * /dashboard/note-search:
+ *   post:
+ *     summary: Search for Notes
+ *     description: Searches for notes based on the search term for authenticated users
+ *     security:
+ *       - cookieAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - searchTerm
+ *             properties:
+ *               searchTerm:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Search results rendered successfully
+ */
 router.post("/dashboard/note-search", isAuth, async (req, res, next) => {
   try {
     let searchTerm = req.body.searchTerm;
