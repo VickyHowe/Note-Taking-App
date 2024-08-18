@@ -5,18 +5,43 @@
       <fieldset>
         <div class="form-group">
           <label for="email" class="form-label">Email:</label>
-          <input type="email" id="email" name="email" class="form-control" required />
+          <input
+            type="email"
+            id="email"
+            name="email"
+            class="form-control"
+            required
+            pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
+            title="Please enter a valid email address"
+          />
         </div>
         <div class="form-group">
           <label for="password" class="form-label">Password:</label>
-          <input type="password" id="password" name="password" class="form-control" required />
+          <input
+            type="password"
+            id="password"
+            name="password"
+            class="form-control"
+            required pattern=".{8,}" 
+            title="Please create a Password at least 8 characters long" 
+          />
         </div>
         <div class="form-group">
           <label for="username" class="form-label">Username:</label>
-          <input type="text" id="username" name="username" class="form-control" required />
+          <input
+            type="text"
+            id="username"
+            name="username"
+            class="form-control"
+            required
+            />
         </div>
       </fieldset>
-      <input type="submit" value="Register" class="btn btn-secondary btn-create btn-lg btn-block" />
+      <input
+        type="submit"
+        value="Register"
+        class="btn btn-secondary btn-lg btn-block"
+      />
     </form>
   </section>
 </main>

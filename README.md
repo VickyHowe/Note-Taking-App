@@ -1,161 +1,140 @@
 # Note-Taking-App
+This is a simple web application that logins a user, stores a session to avoid repleat signing in and allows a user to create notes that can be:
 
-This application allows user specific notes to be:
-    - created
-    - modified
-    - searched
-    - deleted
++ created
++ modified
++ searched
++ deleted
 
-    This application uses node.js to handle middlewares , SQLlite remote database, and react for front end JS and HTML.
+
+This application utilizes;
+
++ node.js with Express to handle middlewares
++ A MongoDB local database to store data
++ CRUD Operations to handle User requests
++ Error Handling through custom middlewares
++ User Navigation through EJS with Bootstrap and CSS
++ A simple login system with Passport.js for authentication
+
+
 
 ## User Interface:
 
-### Fixed
-    
-#### Header Navigation Bar
-        - Logo - Onclick returns to landing page
-        - Search - Visible only upon login
-        - Home - If user logged it returns to "My Notes" Page, Otherwise uses "Guest" account
+### HomePage Screen
+![Homepage, Note taking app](./public/img/readme/img_homepage-note-taking-app.PNG)
 
+### Login Screen
+![Login Screen, Note taking app](./public/img/readme/img_login-note-taking-app.PNG)
 
-### Home Page
-        - "Get Started" button linking to Login
+### Register Screen
+![Register Screen, Note taking app](./public/img/readme/img_register-note-taking-app.PNG)
 
-### Login Page
+### Dashboard Screen
+#### No notes present
+![Dashboard Screen-No notes present, Note taking app](./public/img/readme/img_dashboard-note-taking-app.PNG)
 
-#### Center Box:
-        - Enter Email
-        - Enter Password
-        - Remember Me button
-        - Forgot password link - emails temporary password
-        - Statment of login agreening to Privacy Policy and terms of Service
-        - Login Button
-        - Guest Login Button
-        - Not a member? Signup (link)
+#### Notes present
+![Dashboard Screen-Notes present, Note taking app](./public/img/readme/img_dashboard_pop-note-taking-app.PNG)
 
-### New User Creation Page
-#### Center Box:
-        - Email address
-        - Confirm e-mail
-        - Enter a password
-        - Confim password
-        - First Name
-        - Last Name
-        - Box to signup to recieve promotional materials
-        - Create Account Button - that verifies user is unique and all fields filled out
-        - Already Have an account? Login (Link to Login Page)
+### Create Note Screen
+![Create Note Screen, Note taking app](./public/img/readme/img_create_note-note-taking-app.PNG)
 
-### Profile Page
+### Edit Note Screen
+![Edit Note Screen, Note taking app](./public/img/readme/img_edit_note-note-taking-app.PNG)
 
-#### Center Box:
-        - First Name : User Defined
-        - Last Name : User Defined
-        - Email : User Defined
-        - ID : Assigned
-        - Joined on : Assigned
+### Search Note Result Screen
+![Search Note Result Screen, Note taking app](./public/img/readme/img_search_note-note-taking-app.PNG)
 
+## To run this application
 
-### My Notes Page
-
-#### Left Tab
-        - Profile
-        - Notes
-        - Archives
-        - Trash
-
-#### Center Box
-        - My Notes
-        - Add Note button
-        - Filter By:
-            - search bar, color, labels, clear
-        - card image of notes, click to edit, archive, delete
-
-
-### ADD Note Popout
-        - Enter Title
-        - Enter text, font selectable, link image
-        - Set Priority
-        - Add Label
-        - Change colour
-        - Add Note/Update Note
-        - Cancel
-
------------------------------------------------
-# This is a simple notetakeing app
-
-## Frontend
-/views
-- HTML
-- EJS
-- JS
-- Bootstrap
-
-## Backend
-- Node 
-- Express
-
-### Routing
-/routes
-
-## DB Connector
-/db
-
-## Database
-- Sqlite
-
-## Usage
-
+### Setup
+1. Clone the repository
+2. Install the required packages by running `npm install` in the project directory
 ```
 npm install
+```
+3. Create a `.env ` file in the main project folder. 
+
++ for MONGODB_URI = mongodb://localhost:27017/yourdatabasehere
+As we are using a local database no password is required. Relplace 'yourdatabasehere' with database name of choice.
++ Fill in a Port for the project to run
+
++ To get Google OAuth Credentials Refer to [OAuth client ID Credentials](https://developers.google.com/workspace/guides/create-credentials#oauth-client-id) and copy your GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET=. The 'GOOGLE_CALLBACK_URL=http://localhost:(PORTYOUCHOSE)/google/callback' Replace th port with the port you are using and should match the one set in Google when creating credientials.
+
++ SESSION_SECRET= Needs to be in string format you can use any value here.
+
+```
+MONGODB_URI = mongodb://localhost:27017/yourdatabasehere
+
+PORT= REPLACE THIS WITH A PORT
+
+GOOGLE_CLIENT_ID=
+GOOGLE_CLIENT_SECRET=
+GOOGLE_CALLBACK_URL=http://localhost:(PORTYOUCHOSE)/google/callback
+
+SESSION_SECRET=' '
+
+```
+### Running the program
+1. Run `npm start` in the project directory to start the server
+```
 npm start
 ```
+2. Open a web browser and navigate to `http://localhost:(match port number you set)/` to access
 
-## References 
-
-https://www.youtube.com/watch?v=jins2yHN81s
-https://github.com/jdesboeufs/connect-mongo/blob/HEAD/MIGRATION_V4.md
-
-https://youtu.be/F-sFp_AvHc8
 
 
 
-notetaking-app/
+## References 
+Throughout this project I referenced Blackbox ai to aid in troubleshoot issues when I got stuck.
 
-app.js
+1) Chat blackbox: Ai code generation, code chat, code search. Chat Blackbox: AI Code Generation, Code Chat, Code Search. (n.d.). https://www.blackbox.ai/ 
 
-config/
+SettingTo setup MongoDB and passport strategies I referenced;
 
-db.js
+2) Jdesboeufs. (n.d.). Connect-Mongo/MIGRATION_V4.MD at 962C7DB8AFB14778EF6E3530F0ED9E4EDFF47CE9 · 
+3) jdesboeufs/connect-mongo. GitHub. https://github.com/jdesboeufs/connect-mongo/blob/HEAD/MIGRATION_V4.md 
 
-models/
+4) YouTube. (n.d.-b). https://youtu.be/F-sFp_AvHc8 
 
-notetakingappSchema.js
+For the EJS layout and project flow I referenced;
 
-note.js
+5) YouTube. (n.d.-a). https://youtu.be/BDo1lgaZuII?si=Ji6YIwMcBCm6Rhtc 
 
-routes/
+My images are free public images from;
 
-index.js
-
-notes.js
-
-views/
-
-index.ejs
-
-new.ejs
-
-edit.ejs
-
-layout.ejs
-
-public/
-
-styles.css
-
-package.json
+6) Free stock photos, royalty free stock images & Copyright Free Pictures · Pexels. (n.d.). https://www.pexels.com/ 
 
 
-images
-https://www.pexels.com/photo/a-corkboard-with-blank-notes-8534461/
-https://www.pexels.com/photo/blank-white-paper-sheet-on-wooden-table-4207707/
+## Summary
+<details>
+  <summary>Things I learned</summary>
+  <ul>
+    <li>Express Route Handling</li>
+    <li>How to restructure a project for scalability</li>
+    <li>GitHub workflow</li>
+    <li>How to use MongoDB</li>
+    <li>How to link EJS pages for Web Scalability</li>
+  </ul>
+</details>
+
+<details>
+  <summary>Things I found difficult</summary>
+  <ul>
+    <li>Proper EJS linking and formatting</li>
+    <li>Proper database data linking</li>
+    <li>Search Bar for notes to properly search notes in database</li>
+    <li>Project file structure and proper linking and order of project elements</li>
+  </ul>
+</details>
+
+<details>
+  <summary>Nice To Have Future Features</summary>
+  <ul>
+    <li>>Application Testing</li>
+    <li>API Route Definitions with Swagger</li>
+    <li>Categories for note sorting</li>
+    <li>Custom colours for notes</li>\
+    <li>Trash Bin to hold deleted notes until emptied</li>
+  </ul>
+</details>

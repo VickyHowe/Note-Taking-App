@@ -41,10 +41,27 @@ h1,h2,h3,h4,h5,h6,p {
     padding: 20px;
     border-radius: 10px;
 }
+.container-fluid-searchnote{
+  background-color: var(--background-color);
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 10px;
+  min-height: 600px;
+}
 .container-fluid-login {
   color: var(--background-color);
   justify-content: center;
   background-color: var(--bs-primary-rgb);
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 10px;
+}
+.container-fluid-breadcrumb {
+  color: var(--bs-primary-rgb);
+  justify-content: center;
+  background-color: var(--background-color);
   max-width: 600px;
   margin: 0 auto;
   padding: 20px;

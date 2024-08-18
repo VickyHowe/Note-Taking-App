@@ -1,23 +1,16 @@
 <div class="continer-fluid pb-5 mb-4">
   <div class="container-fluid-fitnote">
-    <nav aria-label="breadcrumb">
+    <nav aria-label="breadcrumb"class = container-fluid-breadcrumb>
+      <h3 class="fw-bold text-center">Edit Your Note!</h3>
       <ol class="breadcrumb">
         <li class="breadcrumb-item main-breadcrumb-color"><a href="/dashboard">Dashboard</a></li>
-        <li class="breadcrumb-item active active-breadcrumb-color"><%= note.title %>></li>
+        <li class="breadcrumb-item active active-breadcrumb-color"><%= note.title %></li>
       </ol>
     </nav>
   <div class="row mb-">
     <div class="col">
       <div class="col d-flex justify-content-between align-items-center">
         <h3>View Note</h3>
-        <a
-          href="/notes/<%= note._id %>"
-          class="btn btn-danger"
-          data-bs-toggle="modal"
-          id="deleteButton"
-          data-bs-target="deleteModal"
-          >Delete</a
-        >
       </div>
     </div>
   </div>
@@ -41,7 +34,7 @@
     </div>
     <div class="form-group">
       <button type="submit" class="btn btn-secondary btn-create btn-lg">Update</button>
-      <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</button>
+      <button type="button" class="btn btn-danger btn-create btn-lg" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</button>
     </div>
   </form>
 </div>

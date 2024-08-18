@@ -22,12 +22,11 @@ successRedirect: "/dashboard",
 }));
 
 
-router.post("/register", async (req, res, next) => {
+router.post("/register", async (req, res) => {
   const { email, password, username } = req.body;
 
   if (!email || !password || !username) {
-    const err = new Error('Email, password, and username are required');
-    err.status = 400;
+    res.status(400).send('Email, password, and username are required');
     return next(err);
   }
 
@@ -37,7 +36,6 @@ router.post("/register", async (req, res, next) => {
       if (err) {
         return next(err);
       }
-      console.log('User registered successfully');
       res.redirect("/dashboard");
     });
   } catch (err) {
@@ -45,15 +43,6 @@ router.post("/register", async (req, res, next) => {
   }
 });
 
-// this route is for testing users in database
-// router.get('/users', async (req, res) => {
-//   try {
-//     const users = await User.find().select('-password'); 
-//     res.send(users);
-//   } catch (err) {
-//     res.status(500).send('Error fetching users');
-//   }
-// });
 
 // Login Route
 router.post("/login", (req, res, next) => {

@@ -35,9 +35,9 @@ router.get("/dashboard", isAuth, async (req, res, next) => {
   }
 });
 
+
 // Create a new note
 router.post("/dashboard/note-create", isAuth, async (req, res, next) => {
-  console.log("Req body:", req.body); 
   try {
     const newNote = new Notes({
       user_id:req.user._id,
@@ -45,15 +45,16 @@ router.post("/dashboard/note-create", isAuth, async (req, res, next) => {
       noteBody:req.body.noteBody,
     });
     await newNote.save();
-    console.log("Note created:", newNote); 
     res.redirect("/dashboard");
   } catch (err) {
     next(err);
   }
 });
 
+
 // Get note Page
-router.get("/dashboard/note-create", isAuth, async(req, res) => {
+router.get("/dashboard/note-create", isAuth, async(req, res, next) => {
+  try {
   res.render("note-create", {
     layout: "../views/layouts/dashboardFrame",
     info: {
@@ -61,6 +62,9 @@ router.get("/dashboard/note-create", isAuth, async(req, res) => {
       description: "Create a Note - Note Taking App ",
     },
   });
+} catch (err) {
+  next(err);
+}
 });
 
 
@@ -80,14 +84,14 @@ router.get("/dashboard/notes/:id", isAuth, async (req, res, next) => {
         },
       });
     } else {
-      const err = new Error(`Note not found with ID ${id}`);
-      err.status = 404;
+      res.status(404).send(`Note not found with ID ${id}`);
       next(err);
     }
   } catch (err) {
     next(err);
   }
 });
+
 
 // Update a note by ID
 router.put("/dashboard/notes/:id", isAuth, async (req, res, next) => {
@@ -100,14 +104,14 @@ router.put("/dashboard/notes/:id", isAuth, async (req, res, next) => {
     if (note) {
       res.redirect('/dashboard');
     } else {
-      const err = new Error(`Note not found with ID ${id}`);
-      err.status = 404;
+      res.status(404).send(`Note not found with ID ${id}`);
       next(err);
     }
   } catch (err) {
     next(err);
   }
 });
+
 
 // Delete a note by ID
 router.delete("/dashboard/notes/:id", isAuth, async (req, res, next) => {
@@ -117,8 +121,7 @@ router.delete("/dashboard/notes/:id", isAuth, async (req, res, next) => {
     if (note) {
       res.redirect('/dashboard');
     } else {
-      const err = new Error(`Note not found with ID ${id}`);
-      err.status = 404;
+      res.status(404).send(`Note not found with ID ${id}`);
       next(err);
     }
   } catch (err) {
@@ -126,14 +129,50 @@ router.delete("/dashboard/notes/:id", isAuth, async (req, res, next) => {
   }
 });
 
-// // This route is for testing notes in database
-// router.get('/notes', async (req, res) => {
-//   try {
-//     const notes = await Notes.find(); 
-//     res.send(notes);
-//   } catch (err) {
-//     res.status(500).send('Error fetching notes');
-//   }
-// });
+
+// Get Search Note
+router.get("/dashboard/note-search", isAuth, async(req, res, next) => {
+  try {
+    res.render("note-search", {
+      noteID: "", // Initialize noteID as an empty string
+      layout: "../views/layouts/dashboardFrame",
+      results: "",
+      info: {
+        title: "Search for A Note",
+        description: "Create a Note - Note Taking App ",
+      },
+    });
+  } catch (err) {
+    next(err);
+  }
+});
+
+
+
+// Post Search Note
+router.post("/dashboard/note-search", isAuth, async (req, res, next) => {
+  try {
+    let searchTerm = req.body.searchTerm;
+    const removeSpecialChars = searchTerm.replace(/[^a-zA-Z0-9]/g, "");
+    const searchResults = await Notes.find({
+      user_id: req.user._id,
+      $or: [
+        { title: { $regex: removeSpecialChars, $options: 'i' } },
+        { noteBody: { $regex: removeSpecialChars, $options: 'i' } }
+      ]
+    });
+    res.render('note-search', {
+      noteID: "",
+      results: searchResults,
+      layout: "../views/layouts/dashboardFrame",
+      info: {
+        title: "Search for A Note",
+        description: "Create a Note - Note Taking App ",
+      },
+    });
+  } catch (err) {
+    next(err);
+  }
+});
 
 module.exports = router;
