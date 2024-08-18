@@ -1,17 +1,37 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Dashboard</title>
-  <script src="script.js"></script>
-</head>
-<body>
-<!-- dashboard.ejs -->
-
-<h1>Dashboard</h1>
-<div id="dashboard-data"></div>
-<form action="/logout" method="post">
-  <button type="submit">Logout</button>
-</form>
-</body>
-</html>
-
+<div class="container-fluid">
+  <div class="container-fluid-displaynote">
+    <div class="row justify-content-center">
+      <div class="col-md-12 text-center">
+        <h2 class="note-welcome-user" mb-4>Welcome <%= user %>, To Your Notes!</h2>
+        <% if (notes.length === 0) { %>
+          <h2> Create Your First Note!</h2>
+          <figure>
+            <img
+              src="img/pexels-anete-lusina-5239790.png"
+              alt="Hand holding a pen over a notepad"
+              width="500"
+              height="400"
+            />
+          </figure>
+          <a href="/dashboard/note-create" class="btn btn-secondary btn-create mb-4">Create A Note</a>
+        <% } else { %>
+          <a href="/dashboard/note-create" class="btn btn-secondary btn-create mb-4">Create A Note</a>
+          <div id="note-container" class="row note-card">
+            <% notes.forEach((note) => { %>
+              <div class="col-md-4 mb-2">
+                <a href="/dashboard/notes/<%= note._id %>" class="card-link">
+                  <div class="card mb-3">
+                    <div class="card-body">
+                      <h5 class="card-title"><%- note.title %></h5>
+                      <p class="card-text"><%- note.noteBody %></p>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            <% }); %>
+          </div>
+        <% } %>
+      </div>
+    </div>
+  </div>
+</div>

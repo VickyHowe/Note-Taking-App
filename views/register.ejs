@@ -1,34 +1,47 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Login</title>
-  <link rel="stylesheet" href="/css/styles.css">
-</head>
-<body>
-  <div class="container">
-<!-- register.ejs -->
-
-
-<h1>Register</h1>
-
-<form action="/register" method="post">
-  <label for="email">Email:</label>
-  <input type="email" id="email" name="email"><br><br>
-  <label for="password">Password:</label>
-  <input type="password" id="password" name="password"><br><br>
-  <label for="username">Username:</label>
-  <input type="text" id="username" name="username"><br><br>
-  <input type="submit" value="Register">
-</form>
-
-
-<% if (message) { %>
-
-  <p><%= message %></p>
-
-<% } %>
-  </div>
-
-
-  </body>
-  </html>
+<main class="container-fluid container-fluid-login">
+  <section class="container">
+    <h1>Register</h1>
+    <form action="/register" method="post" class="login-form">
+      <fieldset>
+        <div class="form-group">
+          <label for="email" class="form-label">Email:</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            class="form-control"
+            required
+            pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
+            title="Please enter a valid email address"
+          />
+        </div>
+        <div class="form-group">
+          <label for="password" class="form-label">Password:</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            class="form-control"
+            required pattern=".{8,}" 
+            title="Please create a Password at least 8 characters long" 
+          />
+        </div>
+        <div class="form-group">
+          <label for="username" class="form-label">Username:</label>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            class="form-control"
+            required
+            />
+        </div>
+      </fieldset>
+      <input
+        type="submit"
+        value="Register"
+        class="btn btn-secondary btn-lg btn-block"
+      />
+    </form>
+  </section>
+</main>

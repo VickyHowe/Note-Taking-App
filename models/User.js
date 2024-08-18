@@ -11,7 +11,6 @@ const userSchema = new mongoose.Schema({
         const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
         return emailRegex.test(email);
       },
-      message: 'Invalid email address',
     },
   },
   password: {
@@ -20,17 +19,18 @@ const userSchema = new mongoose.Schema({
   username: {
     type: String,
   },
-  googleID: {
-    type: String,
-  },
 });
 
 userSchema.pre("save", async function (next) {
-  if (this.password) {
-    const salt = await bcrypt.genSalt(10);
-    this.password = await bcrypt.hash(this.password, salt);
+  try {
+    if (this.password) {
+      const salt = await bcrypt.genSalt(10);
+      this.password = await bcrypt.hash(this.password, salt);
+    }
+    next();
+  } catch (err) {
+    next(err);
   }
-  next();
 });
 
 const User = mongoose.model("User", userSchema);
