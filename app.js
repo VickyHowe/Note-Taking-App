@@ -8,7 +8,7 @@ const connectDB = require('./config/db');
 const passport = require("passport");
 const session = require('express-session');
 
-const MongoStore = require('connect-mongo@3');
+const MongoStore = require('connect-mongo');
 const errorHandler = require('./middlewares/errorHandler');
 
 /**
