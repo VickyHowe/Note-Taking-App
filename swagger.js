@@ -13,8 +13,8 @@ const swaggerOptions = {
             },
             servers: [
                 {
-                    url: "http://localhost:3030",
-                    description: "Local Server"
+                    url: "https://note-taking-app-6duw.onrender.com",
+                    description: "Render Server"
                 }
             ]          
         }
