@@ -1,5 +1,5 @@
 # Note-Taking-App
-Sample of this app deployed at [https://note-taking-app-6duw.onrender.com](https://note-taking-app-6duw.onrender.com). Please note this is the free deployment version at this time so will need to be patient and refresh to "wake-up" the server. 
+Sample of this app deployed at [https://note-taking-app-6duw.onrender.com](https://note-taking-app-6duw.onrender.com). Please note this is the free deployment version at this time so will need to be patient and refresh to "wake-up" the server. Note:Google Login not configured for deployed app. Hope to do this soon!
 
 This is a simple web application that logins a user, stores a session to avoid repleat signing in and allows a user to create notes that can be:
 
