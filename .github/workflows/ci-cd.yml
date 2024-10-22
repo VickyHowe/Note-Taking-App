@@ -1,35 +1,35 @@
 name: Deploy to Render
 
 on: 
-    push:
-        branches:
-            - main
+  push:
+      branches:
+          - main
 
 jobs:
-    build-and-deploy:
-        runs-on: ubuntu-latest
-        env:
-            MONGO_URI: ${{ secrets.MONGO_URI }}
-            GOOGLE_CLIENT: ${{ secrets.GOOGLE_CLIENT }}
-            GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
-            GOOGLE_CALLBACK_URL: ${{ secrets.GOOGLE_CALLBACK_URL }}
-            SESSION_SECRET: ${{ secrets.SESSION_SECRET }}
-            PORT: ${{ secrets.PORT }}
+  build-and-deploy:
+      runs-on: ubuntu-latest
+      env:
+          MONGO_URI: ${{ secrets.MONGO_URI }}
+          GOOGLE_CLIENT: ${{ secrets.GOOGLE_CLIENT }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          GOOGLE_CALLBACK_URL: ${{ secrets.GOOGLE_CALLBACK_URL }}
+          SESSION_SECRET: ${{ secrets.SESSION_SECRET }}
+          PORT: ${{ secrets.PORT }}
 
-        steps:
-            - name: Checkout the repo/code
+      steps:
+          - name: Checkout the repo/code
             uses: actions/checkout@v2
 
-            - name: Setup Node.JS
+          - name: Setup Node.JS
             uses: actions/setup-node@v2
             with:
-                node-version: '20.x'
+              node-version: '20.x'
             
-            - name: Install Dependencies
+          - name: Install Dependencies
             run: npm install
 
-            - name: Deploy to Prod
+          - name: Deploy to Prod
             uses: johnbeynon/render-deploy-action@v0.0.8
             with:
-                service-id: ${{ secrets.SERVICE_ID }}
-                api-key: ${{ secrets.API_KEY }}
+              service-id: ${{ secrets.SERVICE_ID }}
+              api-key: ${{ secrets.API_KEY }}
